@@ -4,6 +4,7 @@
   "description": "A language Interpretation and Recognition Interface that uses command line in node to give you back data",
   "main": "liri.js",
   "dependencies": {
+    "colors": "^1.3.1",
     "dotenv": "^6.0.0",
     "moment": "^2.22.2",
     "node-spotify-api": "^1.0.7",

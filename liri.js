@@ -3,7 +3,7 @@ require("dotenv").config();
 // import my files here
 var keys = require('./keys.js');
 var spotify = keys.spotify; // I keep getting errors when i do new Spotify(keys.spotify........)
-
+var colors = require('colors')
 var request = require('request')
 var moment = require('moment')
 
@@ -15,8 +15,14 @@ for (i = 3; i < process.argv.length; i++){
 }
 
 function concert(input){
+// if input is nothing
+    if (input === ''){
+        return console.log("Please input a artist name".red)
+    }
+
     //redefine input as artist
     var artist = input;
+
 
     //link to api
     var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
