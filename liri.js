@@ -10,13 +10,13 @@ var moment = require('moment')
 // take in user inputs
 var command = process.argv[2]
 var input = ''
-for (i = 3; i < process.argv.length; i++){
-    input += process.argv[i];
+for (i = 3; i < process.argv.length; i++) {
+    input += process.argv[i]; //Think of a way to put these inputs together cleanly for urls....
 }
 
-function concert(input){
-// if input is nothing
-    if (input === ''){
+function concert(input) {
+    // if input is nothing
+    if (input === '') {
         return console.log("Please input a artist name".red)
     }
 
@@ -28,17 +28,45 @@ function concert(input){
     var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
     console.log(queryURL)
 
+    request(queryURL, function (error, response, body) {
+        if (error) {
+            return error
+        }
+        else if (!error && response.statusCode === 200) {
+            //to make it easier to read
+            var call = JSON.parse(body)[0]
+            
+            function printVenue() {
+                console.log("=================================================".blue)
+                console.log(artist + " is performing at " + call.venue.name)
+                console.log("At " + call.venue.city + ", " + location)
+                console.log("On " + moment(call.datetime, moment.ISO_8601).format("MM/DD/YYYY"))
+                console.log("=================================================".blue)
+            }
+
+            // if there is no region
+            if (call.venue.region === "") {
+                var location = call.venue.country;
+                printVenue();
+            } else {
+                var location = call.venue.region;
+                printVenue();
+            }
+        }
+    })
+
+
 }
 
-function spotify(){}
+function spotify() { }
 
-function movie(){}
+function movie() { }
 
-function doWhatItSays(){}
+function doWhatItSays() { }
 
 
 
-switch(command){
+switch (command) {
     case 'concert-this':
         concert(input)
         break;
