@@ -70,12 +70,13 @@ function concert(input) {
     
 }
 
-function spotify(input) {
+function spotifySong(input) {
     // if they don't put in anything pull up "The Sign" by The Ace of Base
     if (input === '') {
-        input = 'The+Sign';
+        input = 'The Sign';
         console.log("No input detected, defaulting search to \"The Sign\"".green)
     }
+    // var artist = input.replace(/ /g, "+");
     
     spotify.search({
         type: 'track',
@@ -84,7 +85,7 @@ function spotify(input) {
         if (err) {
             console.log("Error occured: " + err);
         }
-        console.log(data)
+        console.log(data.tracks.items[0].artists)
     });
 
     // check if it works later and check out the format of it if its JSON
@@ -125,6 +126,7 @@ function movie(input) {
             console.log("\n=================================================".blue)
 
             //consider doing colors based on rating using a function
+            // ie instead of console.log make ratingColor(call.imdbRating) and inside that function console.log it based on the rating with if else functions up to 3
 
         }
     })
@@ -141,7 +143,7 @@ switch (command) {
         concert(input)
         break;
     case 'spotify-this-song':
-        spotify(input)
+        spotifySong(input)
         break;
     case 'movie-this':
         movie(input)
