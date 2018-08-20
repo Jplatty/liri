@@ -196,6 +196,6 @@ switch (command) {
         break;
 
     default:
-        console.log("I could not recognize that command, please state one of these commands: ")
-        console.log("\nconcert-this" + "\nspotify-this-song" + "")
+        console.log("I could not recognize that command, please state one of these commands: ".red)
+        console.log("\nconcert-this" + "\nspotify-this-song" + "\nmovie-this" + "\ndo-what-it-says")
 }
