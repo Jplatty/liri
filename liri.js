@@ -17,11 +17,12 @@ var input = ''
 // example = [Red, Velvet] => "Red Velvet"
 input = process.argv.slice(3).join(" ")
 
-
+// Warning! code is repeated twice due to the fact that colors is used.
 
 function concert(input) {
     // if input is nothing
     if (input === '') {
+        log("Please input a artist name")
         return console.log("Please input a artist name".red)
     }
 
@@ -32,16 +33,29 @@ function concert(input) {
     //link to api
     var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp"
     console.log(queryURL)
-
     request(queryURL, function (error, response, body) {
         if (error) {
+            error.red
             return error.red
         }
         else if (!error && response.statusCode === 200) {
+            //if band does not exist or Band does not perform anymore
+            if (body.length < 20) {
+                log("Sorry! No results found.")
+                return console.log("Sorry! No results found");
+            }
             //to make it easier to read
             var call = JSON.parse(body)[0]
 
             function printVenue() {
+                //outputs to log.txt
+                log("=================================================")
+                log(input + " is performing at " + call.venue.name)
+                log("At " + call.venue.city + ", " + location)
+                log("On " + moment(call.datetime, moment.ISO_8601).format("MM/DD/YYYY"))
+                log("=================================================")
+
+                // outputs to terminal/bash
                 console.log("=================================================".blue)
                 console.log(input + " is performing at " + call.venue.name)
                 console.log("At " + call.venue.city + ", " + location)
@@ -76,54 +90,60 @@ function spotifySong(input) {
         query: input
     }, function (err, data) {
         if (err) {
-            console.log("Error occured: ".red + err.red);
-        }
-        // For easier readability
-        var searchResults = data.tracks.items;
-        //Take the first 3 results
+            return err.red;
 
-        // notify user that there are 5 search results
-        console.log('There are 3 results based on your search on \''.cyan + input.yellow + "\'".cyan)
+        } else {
+            // For easier readability
+            var searchResults = data.tracks.items;
+            //Take the first 3 results
 
-        for (i = 0; i < 3; i++) {
+            if (searchResults.length < 20) {
+                return console.log("There were no results for ".red + input)
+            }
+                // notify user that there are 3 search results
+                console.log('There are 3 results based on your search on \''.cyan + input.yellow + "\'".cyan)
 
-            // created artist array for the case of multiple artists
-            var artist = []
+                for (i = 0; i < 3; i++) {
+
+                    // created artist array for the case of multiple artists
+                    var artist = []
 
 
-            console.log("======================================================================\n".blue)
+                    console.log("======================================================================\n".blue)
 
-            //Artists, in the case for 1 artist
-            if (searchResults[i].artists.length === 1) {
+                    //Artists, in the case for 1 artist
+                    if (searchResults[i].artists.length === 1) {
 
-                console.log("Artist: " + searchResults[i].artists[0].name)
+                        console.log("Artist: " + searchResults[i].artists[0].name)
 
-            } else { // If there are multiple artists
+                    } else { // If there are multiple artists
 
-                for (j = 0; j < searchResults[i].artists.length; j++) {
-                    //push into artist array
-                    artist.push(searchResults[i].artists[j].name)
+                        for (j = 0; j < searchResults[i].artists.length; j++) {
+                            //push into artist array
+                            artist.push(searchResults[i].artists[j].name)
+                        }
+                        //Then join the outputs in the array as a string with & in between each index
+                        console.log("Artists: " + artist.join(" & ").yellow)
+                    }
+
+
+                    //Song Name
+                    console.log("\nSong Name: " + searchResults[i].name.yellow)
+
+
+                    // Preview Link
+                    // if preview_url is === null
+                    if (searchResults[i].preview_url === null) {
+                        console.log("\nSorry! No preview URL is available".red)
+                    } else {
+                        console.log("\nPreview URL: " + searchResults[i].preview_url.underline.blue)
+                    }
+
+                    // Album Name
+                    console.log("\nAlbum Name: " + searchResults[i].album.name.yellow.bold + "\n")
+
                 }
-                //Then join the outputs in the array as a string with & in between each index
-                console.log("Artists: " + artist.join(" & ").yellow)
-            }
-
-
-            //Song Name
-            console.log("\nSong Name: " + searchResults[i].name.yellow)
-
-
-            // Preview Link
-            // if preview_url is === null
-            if (searchResults[i].preview_url === null) {
-                console.log("\nSorry! No preview URL is available".red)
-            } else {
-                console.log("\nPreview URL: " + searchResults[i].preview_url.underline.blue)
-            }
-
-            // Album Name
-            console.log("\nAlbum Name: " + searchResults[i].album.name.yellow.bold + "\n")
-
+            
         }
     });
 };
@@ -201,16 +221,25 @@ function start() {
 }
 // run the program
 start()
-log()
+logCommand()
 
 //print out a long
-function log() {
+function logCommand() {
     fs.appendFile("log.txt", "Command: " + process.argv.slice(2).join(" ") + "\r\n", function (err) {
         if (err) {
             console.log(err.red);
         } else {
-            console.log("\ninput is put into log.txt".green)
+            console.log("\nCommand input is put into log.txt".green)
         }
     })
     // console.log()
+}
+
+function log(print) {
+    // Syncronously append the file into the file
+    fs.appendFileSync("log.txt", print + "\r\n", function (err) {
+        if (err) {
+            console.log(err.red);
+        }
+    })
 }

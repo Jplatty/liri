@@ -1,0 +1,127 @@
+Command: concert-this Artic Monkeys
+=================================================
+Artic Monkeys is performing at Manchester Arena
+At Manchester, United Kingdom
+On 09/06/2018
+=================================================
+Command: concert-this ASDFASDF
+Command: concert-this ASDFASDF
+Command: concert-this ASDFASDF
+Command: concert-this ASDFASDF
+Command: concert-this MGNT
+Command: concert-this MGNT
+Command: concert-this Beyonce
+=================================================
+Beyonce is performing at New Era Field
+At Orchard Park, NY
+On 08/18/2018
+=================================================
+Command: concert-this MGNT
+Command: concert-this MGNT
+Command: concert-this MGMT
+=================================================
+MGMT is performing at Electric Picnic
+At Portland, OR
+On 09/03/2018
+=================================================
+Command: concert-this MGMT
+Command: concert-this Red Velvet
+Command: concert-this Red Velvet
+=================================================
+Red Velvet is performing at Alleycatz
+At Toronto, Canada
+On 09/15/2018
+=================================================
+Command: concert-this MGMT
+=================================================
+MGMT is performing at Electric Picnic
+At Portland, OR
+On 09/03/2018
+=================================================
+Command: concert-this ABBA
+Command: concert-this ABBA
+Command: concert-this ABBA
+Command: concert-this IONSE
+Command: concert-this IONSE
+Command: concert-this IONSE
+Command: concert-this IONSE
+Command: concert-this IONSE
+Command: concert-this IONSE
+Command: concert-this IONSE
+Command: concert-this IONSE
+Command: concert-this Ikon
+=================================================
+Ikon is performing at Fukuoka Kokusai Center
+At Fukuoka, Japan
+On 08/24/2018
+=================================================
+Command: concert-this IONSE
+Command: concert-this IONSE
+Command: concert-this blink-
+Command: concert-this blink-182
+=================================================
+blink-182 is performing at Kelly Slater Wave Co. Surf Ranch
+At Lemoore, CA
+On 09/08/2018
+=================================================
+Command: concert-this blink-182
+=================================================
+blink-182 is performing at Kelly Slater Wave Co. Surf Ranch
+At Lemoore, CA
+On 09/08/2018
+=================================================
+Command: concert-this blink-182
+=================================================
+blink-182 is performing at Kelly Slater Wave Co. Surf Ranch
+At Lemoore, CA
+On 09/08/2018
+=================================================
+Command: concert-this asddgh
+Command: concert-this asddgh
+Command: concert-this asddgh
+Command: concert-this asddgh
+Command: concert-this asddgh
+Command: concert-this asddgh
+Command: concert-this red velvet
+=================================================
+red velvet is performing at Alleycatz
+At Toronto, Canada
+On 09/15/2018
+=================================================
+Command: concert-this ABBA
+Command: concert-this IONIC
+Command: concert-this beyonce
+=================================================
+beyonce is performing at Williams-Brice Stadium
+At Columbia, SC
+On 08/21/2018
+=================================================
+Command: concert-this mgmt
+=================================================
+mgmt is performing at Electric Picnic
+At Portland, OR
+On 09/03/2018
+=================================================
+Command: spotify-this-song sdfih
+Command: spotify-this-song sdfih
+Command: spotify-this-song sdfih
+Command: spotify-this-song sdfih
+Command: spotify-this-song sdfih
+Command: spotify-this-song sdfih
+Command: spotify-this-song this song does not exist
+Command: spotify-this-song narims
+Command: spotify-this-song narims
+Command: spotify-this-song narims
+Command: spotify-this-song narims
+Command: spotify-this-song narims
+Command: spotify-this-song narims
+Command: spotify-this-song narims
+Command: concert-this sodieen
+Sorry! No results found.
+Command: concert-this sodieen
+Command: concert-this Red Velvet
+=================================================
+Red Velvet is performing at Alleycatz
+At Toronto, Canada
+On 09/15/2018
+=================================================
