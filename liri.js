@@ -55,7 +55,7 @@ function concert(input) {
                 console.log("On " + moment(call.datetime, moment.ISO_8601).format("MM/DD/YYYY"))
                 console.log("=================================================".blue)
             }
-            
+
             // if there is no region
             if (call.venue.region === "") {
                 var location = call.venue.country;
@@ -66,8 +66,8 @@ function concert(input) {
             }
         }
     })
-    
-    
+
+
 }
 
 function spotifySong(input) {
@@ -77,7 +77,7 @@ function spotifySong(input) {
         console.log("No input detected, defaulting search to \"The Sign\"".green)
     }
     // var artist = input.replace(/ /g, "+");
-    
+
     spotify.search({
         type: 'track',
         query: input
@@ -85,29 +85,72 @@ function spotifySong(input) {
         if (err) {
             console.log("Error occured: " + err);
         }
-        console.log(data.tracks.items[0].artists)
-    });
+        // For easier readability
+        var searchResults = data.tracks.items;
+        //Take the first 5 results
 
-    // check if it works later and check out the format of it if its JSON
-    
+        // notify user that there are 5 search results
+        console.log('There are 5 results based on your search on \''.cyan + input.yellow + "\'".cyan)
+
+        for (i = 0; i < 5; i++) {
+
+            // created artist array for the case of multiple artists
+            var artist = []
+
+
+            console.log("======================================================================\n".blue)
+
+            //Artists, in the case for 1 artist
+            if (searchResults[i].artists.length === 1) {
+
+                console.log("Artist: " + searchResults[i].artists[0].name)
+
+            } else { // If there are multiple artists
+
+                for (j = 0; j < searchResults[i].artists.length; j++) {
+                    //push into artist array
+                    artist.push(searchResults[i].artists[j].name)
+                }
+                //Then join the outputs in the array as a string with & in between each index
+                console.log("Artists: " + artist.join(" & ").yellow)
+            }
+
+
+            //Song Name
+            console.log("\nSong Name: " + searchResults[i].name.yellow)
+
+
+            // Preview Link
+            // if preview_url is === null
+            if (searchResults[i].preview_url === null) {
+                console.log("\nSorry! No preview URL is available".red)
+            } else {
+                console.log("\nPreview URL: " + searchResults[i].preview_url.underline.blue)
+            }
+
+            // Album Name
+            console.log("\nAlbum Name: " + searchResults[i].album.name.yellow.bold + "\n")
+
+        }
+    });
 };
 
 function movie(input) {
-    
+
     if (input === '') {
         input = 'Mr+Nobody';
         console.log("No input detected, defaulting search to \"Mr. Nobody\"".green)
     }
     //redefine input as artist. if multiple spaces in between words, add a + for the query title
     var title = input.replace(/ /g, "+");
-    
-    
+
+
     // use request
-    
+
     //link to api
     var queryURL = "https://www.omdbapi.com/?t=" + title + "&y=&plot=short&apikey=" + omdb.api_key //uses omdb api key in .env file
     console.log(queryURL)
-    
+
     request(queryURL, function (error, response, body) {
         if (error) {
             return error
