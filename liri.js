@@ -12,7 +12,7 @@ var moment = require('moment')
 // take in user inputs
 var command = process.argv[2]
 var input = ''
-input = process.argv.slice(2).join(" ")
+input = process.argv.slice(3).join(" ")
 //.replace(/ /g, "+") use this.
 
 // for (i = 3; i < process.argv.length; i++) {
@@ -32,8 +32,8 @@ function concert(input) {
         return console.log("Please input a artist name".red)
     }
 
-    //redefine input as artist
-    var artist = input;
+    //redefine input as artist with + for query links
+    var artist = input.replace(/ /g, "+");
 
 
     //link to api
@@ -50,12 +50,12 @@ function concert(input) {
 
             function printVenue() {
                 console.log("=================================================".blue)
-                console.log(artist + " is performing at " + call.venue.name)
+                console.log(input + " is performing at " + call.venue.name)
                 console.log("At " + call.venue.city + ", " + location)
                 console.log("On " + moment(call.datetime, moment.ISO_8601).format("MM/DD/YYYY"))
                 console.log("=================================================".blue)
             }
-
+            
             // if there is no region
             if (call.venue.region === "") {
                 var location = call.venue.country;
@@ -66,8 +66,8 @@ function concert(input) {
             }
         }
     })
-
-
+    
+    
 }
 
 function spotify(input) {
@@ -76,7 +76,7 @@ function spotify(input) {
         input = 'The+Sign';
         console.log("No input detected, defaulting search to \"The Sign\"".green)
     }
-
+    
     spotify.search({
         type: 'track',
         query: input
@@ -88,48 +88,44 @@ function spotify(input) {
     });
 
     // check if it works later and check out the format of it if its JSON
-
+    
 };
 
 function movie(input) {
-
+    
     if (input === '') {
         input = 'Mr+Nobody';
         console.log("No input detected, defaulting search to \"Mr. Nobody\"".green)
     }
-    //redefine input as artist
-    var title = input;
-
+    //redefine input as artist. if multiple spaces in between words, add a + for the query title
+    var title = input.replace(/ /g, "+");
+    
+    
     // use request
-
+    
     //link to api
-    var queryURL = "https://www.omdbapi.com/?t=" + title + "&y=&plot=short&apikey=trilogy" //make code to use my own apid key later
+    var queryURL = "https://www.omdbapi.com/?t=" + title + "&y=&plot=short&apikey=" + omdb.api_key //uses omdb api key in .env file
     console.log(queryURL)
-
+    
     request(queryURL, function (error, response, body) {
         if (error) {
             return error
         }
         else if (!error && response.statusCode === 200) {
             //to make it easier to read
-            var call = JSON.parse(body)[0]
+            var call = JSON.parse(body)
+            console.log("=================================================".blue);
+            console.log("\n" + call.Title + "\n");
+            console.log("Year Released: " + call.Year);
+            console.log("IMDB Rating: " + call.imdbRating);
+            console.log("Produced in: " + call.Country);
+            console.log("Available languages: " + call.Language);
+            console.log("\nPlot: " + call.Plot);
+            console.log("Actors: " + call.Actors);
+            console.log("\n=================================================".blue)
 
-            function printVenue() {
-                console.log("=================================================".blue)
-                console.log(artist + " is performing at " + call.venue.name)
-                console.log("At " + call.venue.city + ", " + location)
-                console.log("On " + moment(call.datetime, moment.ISO_8601).format("MM/DD/YYYY"))
-                console.log("=================================================".blue)
-            }
+            //consider doing colors based on rating using a function
 
-            // if there is no region
-            if (call.venue.region === "") {
-                var location = call.venue.country;
-                printVenue();
-            } else {
-                var location = call.venue.region;
-                printVenue();
-            }
         }
     })
 }
