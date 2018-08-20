@@ -1,9 +1,10 @@
 require("dotenv").config();
 
 // import my files here
+var fs = require('fs')
 var keys = require('./keys.js');
 var Spotify = require('node-spotify-api');
-var spotify = new Spotify(keys.spotify); // I keep getting errors when i do new Spotify(keys.spotify........)
+var spotify = new Spotify(keys.spotify);
 var omdb = keys.omdb;
 var colors = require('colors')
 var request = require('request')
@@ -12,18 +13,10 @@ var moment = require('moment')
 // take in user inputs
 var command = process.argv[2]
 var input = ''
+// Breaks the process.argv array and starts it at the 3rd index and creates a string with spaces/" " 
+// example = [Red, Velvet] => "Red Velvet"
 input = process.argv.slice(3).join(" ")
-//.replace(/ /g, "+") use this.
 
-// for (i = 3; i < process.argv.length; i++) {
-//     input += process.argv[i]; //Think of a way to put these inputs together cleanly for urls....
-// }
-// return console.log(process.argv.slice(2).join(" "))  
-// It works native
-
-// ["a", "b", "c", "d"].slice(1,3).join("-") //b-c
-//to replace my places with +s for weblinks 
-// var movie = $(this).attr("data-name").replace(/ /g, "+"); //add + in the space .replace(" ", "+")
 
 
 function concert(input) {
@@ -56,7 +49,7 @@ function concert(input) {
                 console.log("=================================================".blue)
             }
 
-            // if there is no region
+            // if there is no region, like canada for example
             if (call.venue.region === "") {
                 var location = call.venue.country;
                 printVenue();
@@ -76,23 +69,23 @@ function spotifySong(input) {
         input = 'The Sign';
         console.log("No input detected, defaulting search to \"The Sign\"".green)
     }
-    // var artist = input.replace(/ /g, "+");
+
 
     spotify.search({
         type: 'track',
         query: input
     }, function (err, data) {
         if (err) {
-            console.log("Error occured: " + err);
+            console.log("Error occured: ".red + err.red);
         }
         // For easier readability
         var searchResults = data.tracks.items;
-        //Take the first 5 results
+        //Take the first 3 results
 
         // notify user that there are 5 search results
-        console.log('There are 5 results based on your search on \''.cyan + input.yellow + "\'".cyan)
+        console.log('There are 3 results based on your search on \''.cyan + input.yellow + "\'".cyan)
 
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 3; i++) {
 
             // created artist array for the case of multiple artists
             var artist = []
@@ -144,9 +137,6 @@ function movie(input) {
     //redefine input as artist. if multiple spaces in between words, add a + for the query title
     var title = input.replace(/ /g, "+");
 
-
-    // use request
-
     //link to api
     var queryURL = "https://www.omdbapi.com/?t=" + title + "&y=&plot=short&apikey=" + omdb.api_key //uses omdb api key in .env file
     console.log(queryURL)
@@ -175,27 +165,51 @@ function movie(input) {
     })
 }
 
-function doWhatItSays(input) {
-    // import random.txt
+function doWhatItSays() {
+    fs.readFile("random.txt", "utf8", function (error, data) {
+        console.log(data)
+        //split the data into an array
+        var instruction = data.split(",");
+        // [ 'spotify-this-song', '"I Want it That Way"' ]
+        // set the data to run the start function again
+        command = instruction[0]
+        input = instruction[1]
+        start()
+    });
+};
+
+
+function start() {
+    switch (command) {
+        case 'concert-this':
+            concert(input)
+            break;
+        case 'spotify-this-song':
+            spotifySong(input)
+            break;
+        case 'movie-this':
+            movie(input)
+            break;
+        case 'do-what-it-says':
+            doWhatItSays()
+            break;
+
+        default:
+            console.log("I could not recognize that command, please state one of these commands: ".red)
+            console.log("\nconcert-this" + "\nspotify-this-song" + "\nmovie-this" + "\ndo-what-it-says")
+    }
 }
+// run the program
+start()
 
 
-
-switch (command) {
-    case 'concert-this':
-        concert(input)
-        break;
-    case 'spotify-this-song':
-        spotifySong(input)
-        break;
-    case 'movie-this':
-        movie(input)
-        break;
-    case 'do-what-it-says':
-        doWhatItSays(input)
-        break;
-
-    default:
-        console.log("I could not recognize that command, please state one of these commands: ".red)
-        console.log("\nconcert-this" + "\nspotify-this-song" + "\nmovie-this" + "\ndo-what-it-says")
+//print out a long
+function log() {
+    fs.appendFile("log.txt", "Command: " + process.argv.slice(2).join(" ") + "\r\n", function (err) {
+        if (err) {
+            console.log(err.red);
+        } else {
+            console.log("\ninput is put into log.txt".green)
+        }
+    })
 }
