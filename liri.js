@@ -201,7 +201,7 @@ function start() {
 }
 // run the program
 start()
-
+log()
 
 //print out a long
 function log() {
@@ -212,4 +212,5 @@ function log() {
             console.log("\ninput is put into log.txt".green)
         }
     })
+    // console.log()
 }
