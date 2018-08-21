@@ -49,6 +49,11 @@ function concert(input) {
             
             var call = JSON.parse(body)
             var count = 1
+
+            // Report how many results were found
+            log(call.length + " Results were found\r\n\r\n")
+            console.log(call.length + " Results were found\n")
+
             // for how big the body results are
             for (i = 0; i < call.length; i++) {
 
