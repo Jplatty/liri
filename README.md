@@ -52,10 +52,13 @@ example: node liri.js movie-this The Avengers
         * Year of the movie
         * IMDB Rating of the movie if available
         * Rotten Tomatoes Rating of the movie if available
+        * Where was the movie produced
         * Language of the movie
         * Plot of the movie
         * Actors in the movie
     * If there is no movie title inserted, the search will default to Mr. Nobody
+
+    * something special happens if you come across a movie that was produced in a certain country....
 
 ```
 example: node liri.js do-what-it-says
