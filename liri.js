@@ -46,7 +46,7 @@ function concert(input) {
             }
             //to make it easier to read
 
-            
+
             var call = JSON.parse(body)
             var count = 1
 
@@ -61,7 +61,7 @@ function concert(input) {
 
                 if (venueLocation.venue.region === "") {
                     var location =
-                     venueLocation.venue.country;
+                        venueLocation.venue.country;
                     log("Result: " + count)
                     console.log("Result: " + count)
                     printVenue();
@@ -206,6 +206,7 @@ function movie(input) {
             log("\n" + call.Title + "\n");
             log("Year Released: " + call.Year);
             log("IMDB Rating: " + call.imdbRating);
+            // log("Rotten Tomatoes Rating: " + call.imdbRating);
             log("Produced in: " + call.Country);
             log("Available languages: " + call.Language);
             log("\nPlot: " + call.Plot);
@@ -218,11 +219,17 @@ function movie(input) {
             console.log("\n" + call.Title + "\n");
             console.log("Year Released: " + call.Year);
             console.log("IMDB Rating: " + call.imdbRating);
+            // console.log("Rotten Tomatoes Rating: " + call.Ratings.find());
+            // findRottenTomatoes(call.Ratings);
+            console.log(("Rotten Tomatoes: ") + (call.Ratings.find(rating => rating.Source === "Rotten Tomatoes").Value || "N/A"))
             console.log("Produced in: " + call.Country);
             console.log("Available languages: " + call.Language);
             console.log("\nPlot: " + call.Plot);
             console.log("Actors: " + call.Actors);
             console.log("\n=================================================".blue)
+
+
+            // call.Ratings.find()
 
             //consider doing colors based on rating using a function
             // ie instead of console.log make ratingColor(call.imdbRating) and inside that function console.log it based on the rating with if else functions up to 3
