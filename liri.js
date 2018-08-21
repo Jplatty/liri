@@ -233,33 +233,33 @@ function movie(input) {
                 (rate < 5) {
                     return console.log("IMDB Rating: " + rate.red)
                 } else if
-                (rate === "N/A") {
-                    return console.log("IMDB Rating: " + rate.yellow)
-                } else {
+                (rate >= 7) {
                     return console.log("IMDB Rating: " + rate.green)
+                } else {
+                    return console.log("IMDB Rating: " + rate)
                 }
             }
             // used to log to log.txt
             function rottenTomatoeslog() {
                 if (call.Ratings == []) {
-                    return log("Rotten Tomatoes: \"N/A\"")
+                    return log("Rotten Tomatoes: N/A")
                 } else {
                     if (call.Ratings.find(rating => rating.Source === "Rotten Tomatoes")) {
                         return log("Rotten Tomatoes: " + call.Ratings.find(rating => rating.Source === "Rotten Tomatoes").Value)
                     }
                     else
-                        return log("Rotten Tomatoes: \"N/A\"")
+                        return log("Rotten Tomatoes: N/A")
                 }
             }
             function rottenTomatoes() {
                 if (call.Ratings == []) {
-                    return console.log("Rotten Tomatoes: \"N/A\"")
+                    return console.log("Rotten Tomatoes: N/A")
                 } else {
                     if (call.Ratings.find(rating => rating.Source === "Rotten Tomatoes")) {
                         return console.log("Rotten Tomatoes: " + call.Ratings.find(rating => rating.Source === "Rotten Tomatoes").Value)
                     }
                     else
-                        return console.log("Rotten Tomatoes: \"N/A\"")
+                        return console.log("Rotten Tomatoes: N/A")
                 }
             }
             // just for fun in console.log
