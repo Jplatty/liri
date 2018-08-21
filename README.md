@@ -14,12 +14,16 @@ A language Interpretation and Recognition Interface that uses command line in no
 ## Before running LIRI
 
 * Clone down the repository
-* In your terminal or Git Bash, go to the root of your LIRI folder and run **npm install**
 * please use your own api keys and create your own .env file following the format in the env.example file
     * Keys Required:
         * OMDB apikey
         * Spotify id and secret
 
+## Installation
+* Run your terminal/bash and go to the root of the liri folder
+```
+npm install
+```
 
 ## How to use LIRI
 * LIRI is able to take in 4 commands utilizing node.js
