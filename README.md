@@ -29,20 +29,40 @@ A language Interpretation and Recognition Interface that uses command line in no
     * do-what-it-says
 
 ## What each command does
+```
+example: node liri.js concert-this Imagine Dragons
+```
 1. 'node liri.js concert-this \<band or artist name\>'
-    * Displays a list of results of where the band or artist is performing
+    * Displays a list of results of where the band or artist is performing  
+
+```
+example: node liri.js spotify-this-song Mr Brightside
+```
 
 2. 'node liri.js spotify-this-song \<song name\>'
     * Displays the top 3 results of the song name
+
+```
+example: node liri.js movie-this The Avengers
+```
 
 3. 'node liri.js movie-this \<movie title\>'
     * Displays the following information
         * Title of the movie
         * Year of the movie
-        * IMDB Rating of the movie
+        * IMDB Rating of the movie if available
+        * Rotten Tomatoes Rating of the movie if available
+        * Language of the movie
+        * Plot of the movie
+        * Actors in the movie
+    * If there is no movie title inserted, the search will default to Mr. Nobody
+
+```
+example: node liri.js do-what-it-says
+```
 
 4. 'node liri.js do-what-it-says'
-    * 
+    * Takes the text from random.txt and runs the song through the spotify-this-song command
 
 
 * In addition to logging out your results to the terminal, it will log out your inputs and results in a log.txt file!

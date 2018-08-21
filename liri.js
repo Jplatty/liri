@@ -191,7 +191,6 @@ function movie(input) {
 
     //link to api
     var queryURL = "https://www.omdbapi.com/?t=" + title + "&y=&plot=short&apikey=" + omdb.api_key //uses omdb api key in .env file
-    console.log(queryURL)
 
     request(queryURL, function (error, response, body) {
         if (error) {
@@ -206,7 +205,7 @@ function movie(input) {
             log("\n" + call.Title + "\n");
             log("Year Released: " + call.Year);
             log("IMDB Rating: " + call.imdbRating);
-            // log("Rotten Tomatoes Rating: " + call.imdbRating);
+            log(("Rotten Tomatoes: ") + (call.Ratings.find(rating => rating.Source === "Rotten Tomatoes").Value || "N/A"))
             log("Produced in: " + call.Country);
             log("Available languages: " + call.Language);
             log("\nPlot: " + call.Plot);
@@ -228,8 +227,6 @@ function movie(input) {
             console.log("Actors: " + call.Actors);
             console.log("\n=================================================".blue)
 
-
-            // call.Ratings.find()
 
             //consider doing colors based on rating using a function
             // ie instead of console.log make ratingColor(call.imdbRating) and inside that function console.log it based on the rating with if else functions up to 3
