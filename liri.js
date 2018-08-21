@@ -191,7 +191,7 @@ function movie(input) {
 
     //link to api
     var queryURL = "https://www.omdbapi.com/?t=" + title + "&y=&plot=short&apikey=" + omdb.api_key //uses omdb api key in .env file
-
+    console.log(queryURL)
     request(queryURL, function (error, response, body) {
         if (error) {
             log(error + "\r\n")
@@ -205,7 +205,7 @@ function movie(input) {
             log("\n" + call.Title + "\n");
             log("Year Released: " + call.Year);
             log("IMDB Rating: " + call.imdbRating);
-            log(("Rotten Tomatoes: ") + (call.Ratings.find(rating => rating.Source === "Rotten Tomatoes").Value || "N/A"))
+            rottenTomatoeslog()
             log("Produced in: " + call.Country);
             log("Available languages: " + call.Language);
             log("\nPlot: " + call.Plot);
@@ -217,19 +217,61 @@ function movie(input) {
             console.log("=================================================".blue);
             console.log("\n" + call.Title + "\n");
             console.log("Year Released: " + call.Year);
-            console.log("IMDB Rating: " + call.imdbRating);
-            // console.log("Rotten Tomatoes Rating: " + call.Ratings.find());
-            // findRottenTomatoes(call.Ratings);
-            console.log(("Rotten Tomatoes: ") + (call.Ratings.find(rating => rating.Source === "Rotten Tomatoes").Value || "N/A"))
-            console.log("Produced in: " + call.Country);
+            colorRating(call.imdbRating)
+            rottenTomatoes()
+            isUSA(call.Country);
             console.log("Available languages: " + call.Language);
             console.log("\nPlot: " + call.Plot);
             console.log("Actors: " + call.Actors);
             console.log("\n=================================================".blue)
 
-
-            //consider doing colors based on rating using a function
-            // ie instead of console.log make ratingColor(call.imdbRating) and inside that function console.log it based on the rating with if else functions up to 3
+            function colorRating(rate) {
+                if ((rate >= 5) && (rate < 7)) {
+                    return console.log("IMDB Rating: " + rate)
+                }
+                else if
+                (rate < 5) {
+                    return console.log("IMDB Rating: " + rate.red)
+                } else if
+                (rate === "N/A") {
+                    return console.log("IMDB Rating: " + rate.yellow)
+                } else {
+                    return console.log("IMDB Rating: " + rate.green)
+                }
+            }
+            // used to log to log.txt
+            function rottenTomatoeslog() {
+                if (call.Ratings == []) {
+                    return log("Rotten Tomatoes: \"N/A\"")
+                } else {
+                    if (call.Ratings.find(rating => rating.Source === "Rotten Tomatoes")) {
+                        return log("Rotten Tomatoes: " + call.Ratings.find(rating => rating.Source === "Rotten Tomatoes").Value)
+                    }
+                    else
+                        return log("Rotten Tomatoes: \"N/A\"")
+                }
+            }
+            function rottenTomatoes() {
+                if (call.Ratings == []) {
+                    return console.log("Rotten Tomatoes: \"N/A\"")
+                } else {
+                    if (call.Ratings.find(rating => rating.Source === "Rotten Tomatoes")) {
+                        return console.log("Rotten Tomatoes: " + call.Ratings.find(rating => rating.Source === "Rotten Tomatoes").Value)
+                    }
+                    else
+                        return console.log("Rotten Tomatoes: \"N/A\"")
+                }
+            }
+            // just for fun in console.log
+            function isUSA(input){
+                if (input === "USA"){
+                    return console.log("Produced in: " + input.america)
+                }
+                else{
+                    return console.log("Produced in: " + input)
+                }
+                
+            }
 
         }
     })
