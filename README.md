@@ -78,6 +78,10 @@ example: node liri.js do-what-it-says
 * [request NPM Package](https://www.npmjs.com/package/request)
 * [moment NPM Package](https://www.npmjs.com/package/moment)
 
+## Author
+
+* **Tin Dang**  - [tintdang](https://github.com/tintdang)
+
 ## Acknowledgements
 
 * The Coding Boot Camp at UT Austin for giving me the challenge of making this app
