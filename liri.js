@@ -330,7 +330,7 @@ function logCommand() {
 
 function log(print) {
     // Syncronously append the file into the file
-    fs.appendFileSync("log.txt", print + "\r\n", function (err) {
+    fs.appendFile("log.txt", print + "\r\n", function (err) {
         if (err) {
             console.log(err.red);
         }

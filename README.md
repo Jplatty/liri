@@ -2,20 +2,12 @@
 A language Interpretation and Recognition Interface that uses command line in node to give you back data
 * LIRI will search Spotify for songs, Bands in Town for concerts and OMDB for movies
 
-## Technolgies used
-* Node.js
-* fs
-* Spotify NPM Package
-* colors NPM Package
-* request NPM Package
-* moment NPM Package
-
 
 ## Before running LIRI
 
 * Clone down the repository
 * please use your own api keys and create your own .env file following the format in the env.example file
-    * Keys Required:
+    * API Keys Required:
         * OMDB apikey
         * Spotify id and secret
 
@@ -33,12 +25,14 @@ npm install
     * do-what-it-says
 
 ## What each command does
+<img src='./examples/concert-this.gif'><br>
 ```
-example: node liri.js concert-this Imagine Dragons
+example: node liri.js concert-this <band or artist name>
 ```
 1. 'node liri.js concert-this \<band or artist name\>'
     * Displays a list of results of where the band or artist is performing  
 
+<img src='./examples/spotify-this-song.gif'><br>
 ```
 example: node liri.js spotify-this-song Mr Brightside
 ```
@@ -46,6 +40,7 @@ example: node liri.js spotify-this-song Mr Brightside
 2. 'node liri.js spotify-this-song \<song name\>'
     * Displays the top 3 results of the song name
 
+<img src='./examples/movie-this.gif'><br>
 ```
 example: node liri.js movie-this The Avengers
 ```
@@ -64,6 +59,7 @@ example: node liri.js movie-this The Avengers
 
     * something special happens if you come across a movie that was produced in a certain country....
 
+<img src='./examples/do-what-it-says.gif'><br>
 ```
 example: node liri.js do-what-it-says
 ```
@@ -75,3 +71,13 @@ example: node liri.js do-what-it-says
 * In addition to logging out your results to the terminal, it will log out your inputs and results in a log.txt file!
 
 
+## Built With
+* [Node.js](https://nodejs.org/en/)
+* [Spotify NPM Package](https://www.npmjs.com/package/node-spotify-api)
+* [colors NPM Package](https://www.npmjs.com/package/colors)
+* [request NPM Package](https://www.npmjs.com/package/request)
+* [moment NPM Package](https://www.npmjs.com/package/moment)
+
+## Acknowledgements
+
+* The Coding Boot Camp at UT Austin for giving me the challenge of making this app
